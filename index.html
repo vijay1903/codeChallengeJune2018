@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="challengeApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Activity Planner</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="challenge.js"></script>
+<style>
+    h1{
+        text-align: center;
+    }
+</style>
+<body>
+    <div ng-controller="mainCtrl">
+    <div class="container">
+        <h1 class="jumbotron">Welcome to activity planner</h1>
+        <div class="card">
+            <div class="card-header">
+                Activities for parents
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Parent name</th>
+                        <th>Child name</th>
+                        <th>Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in schedule">
+                        <td>{{x.parent}}</td>
+                        <td>{{x.child}}</td>
+                        <td>{{x.activity}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header">
+                Available activity list
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Age</th>
+                        <th>Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in activities">
+                        <td>{{x.age}}</td>
+                        <td>
+                        <ul ng-repeat="y in x.activity">
+                            <li>{{y}}</li>
+                        </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="card-footer">
+            <form>
+                Add new activity : 
+                <input type="number" ng-model="activity_age" min="1" placeholder="Age">
+                <input type="text" ng-model="activity_detail" placeholder="Activity detail">
+                <button ng-click="activity_save()">Save</button>
+                <button type="reset">Reset</button>
+            </form>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header">
+                Parents list
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Parent name</th>
+                        <th>Child name</th>
+                        <th>Child age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr  ng-repeat="k in key" ng-model="parent">
+                        <td>{{k}}</td>
+                        <td>{{parent[k].childName}}</td>
+                        <td>{{parent[k].age}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="card-footer">
+            <form>
+                Add new parent : 
+                <input type="text" ng-model="parent_name" placeholder="Parent Name">
+                <input type="text" ng-model="child_name" placeholder="Child Name">
+                <input type="number" ng-model="child_age" min="1" placeholder="Child age">
+                <button ng-click="parent_save()">Save</button>
+                <button type="reset">Reset</button>
+            </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+</body>
+</html>
