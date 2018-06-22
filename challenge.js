@@ -110,10 +110,12 @@ app.controller('mainCtrl',function($scope){
         }
         console.log(activities, parents);
         scheduleActivities(activities, parents);
+        window.alert('New activity added!');
     }
     $scope.parent_save = function() {
         parents[$scope.parent_name] = {'childName':$scope.child_name,'age':$scope.child_age};
         console.log(activities, parents);
         scheduleActivities(activities, parents);
+        window.alert('New parent detail added!');
     }
 })
