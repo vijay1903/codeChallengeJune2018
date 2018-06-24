@@ -48,11 +48,13 @@ activities = [
 // # - Print one activity at a time per parent and continue cycling through until
 // #   all parents have recieved all their activities.
 
+//declaring the angular module for the app
 var app = angular.module("challengeApp",[]);
 
-app.controller('mainCtrl',function($scope){
-    // $scope.schedule = [{'parent':'Parent Name','child':'Child Name','activity':'Activity for the child'}];
-    
+// main angular controller for the web page
+app.controller('mainCtrl',function($scope){    
+    // function to assign activities to each parent according to the age of their child
+    window.alert('Welcome to the Activity Schedule for your child!');
     var scheduleActivities = function(act, par){
         $scope.activities = act;
         $scope.parent = par;
@@ -65,39 +67,31 @@ app.controller('mainCtrl',function($scope){
         for(c in activities){
             age_group.push(activities[c].age);
         }
-        // console.log("age group ", age_group)
+        //scope array that will store the scheduled activity list
         $scope.schedule = [];
-        for(i in parents) {
-            // console.log("Hi", i, "! \nWelcome to the activity planner. \nHere you can find all the activities for your little toddler.");
-            if(parents[i].childName) {
-                // console.log("For",parents[i].childName,"we have the following activities : ");
+        for(i in parents) { // for each parent
+            if(parents[i].childName) { // for each parents child
             } else {
-                // console.log("However, we don't have information about your child. So cannot suggest any activity.\n");
                 $scope.schedule.push({'parent':i,'child':'Name not available.','activity':'Incomplete Info'});
                 continue;
             }
-            for(a in activities) {
-                // var lookup_age = parents[i].age;
+            for(a in activities) { // for each activity check the age range and if the child is of the same age then assign the activity to the child
                 
-                if(!(age_group.includes(parents[i].age))){
-                    //console.log("Sorry, we have no activity for", parents[i].age,"year old child!!");
-                    $scope.schedule.push({'parent':i,'child':parents[i].childName,'activity': 'No activity for '+parents[i].childName+'\'s age.'});
+                if(!(age_group.includes(parents[i].age))){ // if there is no activity for the child
+                    $scope.schedule.push({'parent':i,'child':parents[i].childName,'activity': 'No activity for '+parents[i].childName+'\'s age.','age':parents[i].age});
                     break;
-                    // lookup_age--;
-                    // console.log("However you can try these activities for a ",lookup_age," year old : ")
                 }
-                for(b in activities[a].activity){
-                    // console.log(b)
-                    if(activities[a].age == parents[i].age){
+                for(b in activities[a].activity){ // assign activities to the child's activity array
+                    if(activities[a].age == parents[i].age){ // if a child can be assigned an activity in a age range lower than his/her age then jsut change '==' with '<='
                         $scope.schedule.push({'parent':i,'child':parents[i].childName,'activity':activities[a].activity[b]});
-                        // console.log(">",activities[a].activity[b]);
                     }
                 }
             }
-            // console.log("Curriculum complete!..\n");
         }
     }
-    scheduleActivities(activities, parents);
+    scheduleActivities(activities, parents); // call the scheduling function
+    
+    // function to save a new activity in the activity array
     $scope.activity_save = function() {
         var age_group = [];
         for(c in activities){
@@ -112,6 +106,8 @@ app.controller('mainCtrl',function($scope){
         scheduleActivities(activities, parents);
         window.alert('New activity added!');
     }
+
+    //function to add a new parent-child entry in the parents array
     $scope.parent_save = function() {
         parents[$scope.parent_name] = {'childName':$scope.child_name,'age':$scope.child_age};
         console.log(activities, parents);

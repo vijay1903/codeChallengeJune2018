@@ -1,3 +1,5 @@
+<!-- Web page to interact with the activity planner -->
+
 <!DOCTYPE html>
 <html lang="en" ng-app="challengeApp">
 <head>
@@ -19,7 +21,7 @@
     <div class="container">
         <h1 class="jumbotron">Welcome to activity planner</h1>
         <div class="card">
-            <div class="card-header">
+            <div class="card-header" data-toggle="tooltip" data-placement="top" title="This is the list of parents and their child with the activity scheduled for the child.">
                 Activities for parents
             </div>
             <table class="table table-hover">
@@ -27,7 +29,7 @@
                     <tr>
                         <th>Parent name</th>
                         <th>Child name</th>
-                        <th>Activity</th>
+                        <th>Activities for the Child</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,14 +43,14 @@
         </div>
         <br>
         <div class="card">
-            <div class="card-header">
+            <div class="card-header" data-toggle="tooltip" data-placement="top" title="This is the list of all the activities that can be scheduled">
                 Available activity list
             </div>
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Age</th>
-                        <th>Activity</th>
+                        <th>Activities for this age</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,7 +64,7 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="card-footer">
+            <div class="card-footer" data-toggle="tooltip" data-placement="top" title="Add a new activity using this form.">
             <form>
                 Add new activity : 
                 <input type="number" ng-model="activity_age" min="1" placeholder="Age">
@@ -74,7 +76,7 @@
         </div>
         <br>
         <div class="card">
-            <div class="card-header">
+            <div class="card-header" data-toggle="tooltip" data-placement="top" title="This is the list of the parents and their children in the system.">
                 Parents list
             </div>
             <table class="table table-hover">
@@ -93,7 +95,7 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="card-footer">
+            <div class="card-footer" data-toggle="tooltip" data-placement="top" title="Use this form to add a new parent to the system.">
             <form>
                 Add new parent : 
                 <input type="text" ng-model="parent_name" placeholder="Parent Name">
@@ -106,6 +108,5 @@
         </div>
     </div>
     </div>
-    
 </body>
 </html>
